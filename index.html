@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#173c31">
+  <title>Yuxin's Life Lab</title>
+  <meta name="description" content="老大的私人生活实验室">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="app">
+  <header class="top"><div class="brand">✦ YUXIN'S LIFE LAB ✦</div><div id="greeting">欢迎回来，老大</div></header>
+  <div class="shell">
+    <aside class="sidebar">
+      <div class="identity"><div class="seal">YX</div><strong>新生研究员</strong><small id="sync-state">本机体验模式</small></div>
+      <nav id="nav">
+        <button data-page="home" class="active">⌂ 今日</button><button data-page="calendar">▦ 日历</button><button data-page="rooms">⚗ 房间</button><button data-page="journal">✎ 日记</button><button data-page="review">♜ 复盘</button><button data-page="settings">⚙ 设置</button>
+      </nav>
+    </aside>
+    <main>
+      <section class="page active" id="page-home">
+        <h1>今日实验室</h1><p class="subtitle">老大，不必一次完成所有事，先让最重要的一件发生。</p>
+        <div class="stats"><article><small>总经验</small><b><span id="xp">0</span> XP</b></article><article><small>今日完成</small><b id="today-count">0 / 0</b></article><article><small>连续记录</small><b><span id="streak">0</span> 天</b></article></div>
+        <div class="columns"><div><section class="panel"><div class="section-head"><h2>📌 固定任务栏</h2><button class="quiet" data-add-type="fixed">＋ 添加</button></div><div id="fixed-tasks"></div></section><section class="panel"><div class="section-head"><h2>🪶 临时任务栏</h2><button class="quiet" data-add-type="temporary">＋ 添加</button></div><div id="temporary-tasks"></div></section></div>
+        <section class="panel"><h2>🗝 四个房间</h2><div class="room-grid"><button data-room="scientist">🔬<b>科研室</b><small>论文 · 实验 · AI</small></button><button data-room="entrepreneur">🪙<b>商业室</b><small>品牌 · 收入 · 机会</small></button><button data-room="creator">🖋<b>创作室</b><small>小说 · 灵感 · 发布</small></button><button data-room="human">☕<b>生活室</b><small>身体 · 情绪 · 照片</small></button></div><blockquote>每一次真实记录，都在替未来的你留下线索。</blockquote></section></div>
+      </section>
+      <section class="page" id="page-calendar"><h1>本周日历</h1><p class="subtitle">日期必填，时间选填 · 周一至周日</p><div class="week" id="week"></div></section>
+      <section class="page" id="page-rooms"><div class="section-head"><div><h1 id="room-title">科研室</h1><p class="subtitle">长期项目与随手记录</p></div><select id="room-select"><option value="scientist">科研室</option><option value="entrepreneur">商业室</option><option value="creator">创作室</option><option value="human">生活室</option></select></div><div class="columns"><section class="panel"><div class="section-head"><h2>长期项目</h2><button class="quiet" id="add-project">＋ 新建</button></div><div id="projects"></div></section><section class="panel"><h2>随手记录</h2><form id="note-form"><textarea name="content" required placeholder="今天的进展、想法或成果……"></textarea><button class="primary">保存记录</button></form><div id="room-notes"></div></section></div></section>
+      <section class="page" id="page-journal"><h1>Daily Journal</h1><p class="subtitle">不用组织完整，关键词也可以。原始表达永远保留。</p><form id="journal-form" class="journal"><label>今天发生了什么？<textarea name="event_text"></textarea></label><label>我的感受是什么？<textarea name="feelings"></textarea></label><label>身体有什么感觉？<textarea name="body_state"></textarea></label><label>今天值得肯定的一件事<textarea name="self_credit"></textarea></label><label>我现在需要什么？<textarea name="needs"></textarea></label><label>自由记录<textarea name="free_text"></textarea></label><div class="actions"><button class="primary">保存今天的日记</button><button type="button" id="copy-ai">✨ 复制给 AI 整理</button></div><p class="notice" id="journal-notice"></p></form></section>
+      <section class="page" id="page-review"><h1>Sunday Review</h1><p class="subtitle">每周日 20:00 · 回顾过去，也为下一周留出方向</p><div class="columns"><section class="panel"><h2>本周数据草稿</h2><ul id="review-summary"></ul><blockquote>这一周无论完成多少，都值得被认真看见。</blockquote></section><section class="panel"><h2>下周最重要的三件事</h2><textarea id="top-three" placeholder="1.&#10;2.&#10;3."></textarea><label>我的补充与感受<textarea id="reflection"></textarea></label><button class="primary" id="save-review">确认并存入档案</button><p class="notice" id="review-notice"></p></section></div></section>
+      <section class="page" id="page-settings"><h1>设置</h1><p class="subtitle">连接云端后，手机和电脑会使用同一份数据。</p><section class="panel settings"><h2>Supabase 云端同步</h2><p id="config-help">正式发布前，在 config.js 中填写 Project URL 与 Publishable key。</p><label>登录邮箱<input type="email" id="email" placeholder="you@example.com"></label><div class="actions"><button class="primary" id="login">发送登录链接</button><button id="logout">退出登录</button></div><p class="notice" id="auth-notice"></p></section><section class="panel"><h2>数据说明</h2><p>云端未连接时，内容只保存在当前设备；云端连接后，私人数据由 Supabase 安全规则保护。</p></section></section>
+    </main>
+  </div>
+</div>
+
+<dialog id="task-dialog"><form method="dialog" id="task-form"><h2 id="task-form-title">添加任务</h2><input type="hidden" name="task_type"><label>任务名称<input required name="title" maxlength="200"></label><label>所属房间<select name="room"><option value="scientist">科研室</option><option value="entrepreneur">商业室</option><option value="creator">创作室</option><option value="human">生活室</option></select></label><label>难度<select name="difficulty"><option value="easy">轻松 · 5 XP</option><option value="normal" selected>普通 · 10 XP</option><option value="hard">困难 · 20 XP</option></select></label><div class="two"><label>日期<input required type="date" name="task_date"></label><label>时间（选填）<input type="time" name="task_time"></label></div><label class="check"><input type="checkbox" name="is_must"> 今日必须完成，逾期扣一半经验</label><div class="actions"><button value="cancel">取消</button><button value="save" class="primary">保存任务</button></div></form></dialog>
+<dialog id="project-dialog"><form method="dialog" id="project-form"><h2>新建项目</h2><label>项目名称<input required name="title"></label><label>目标<textarea name="goal"></textarea></label><div class="two"><label>阶段<select name="stage"><option value="idea">构思</option><option value="active">进行中</option><option value="waiting">等待</option><option value="completed">已完成</option></select></label><label>截止日期<input type="date" name="due_date"></label></div><label>进度 <span id="progress-value">0%</span><input type="range" min="0" max="100" value="0" name="progress"></label><div class="actions"><button value="cancel">取消</button><button value="save" class="primary">保存项目</button></div></form></dialog>
+<script src="config.js"></script><script type="module" src="app.js"></script>
+</body></html>
