@@ -1,2 +1,2 @@
-# auxin-life-lab
+# yuxin-life-lab
 my private life management system 
