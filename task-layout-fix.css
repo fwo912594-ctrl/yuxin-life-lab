@@ -1,0 +1,18 @@
+.task input[type="checkbox"] {
+  width: auto;
+  flex: 0 0 auto;
+}
+
+.task span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.task small {
+  line-height: 1.45;
+}
+
+.task .danger {
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
